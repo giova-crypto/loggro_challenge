@@ -7,4 +7,27 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex: 1 1 auto;
 }
 
+.file-upload {
+  border: 2px solid slategrey;
+  border-radius: 5px;
+  padding: 10px;
+  background: #F0F0F0;
+  display: inline-block;
+  cursor: pointer;
+}
 
+.file-upload input[type="file"] {
+  display: none;
+}
+
+.file-upload label {
+  background: slategrey;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-upload label:hover {
+  background: gray;
+}

@@ -31,6 +31,8 @@ export class NewPageComponent implements OnInit {
     file: [null, Validators.required],
   });
 
+  public fileName: string | null = null;public hourCount: number = 0;
+
   get currentImage(): Image {
     const image = this.imageForm.value as Image;
     return image;
@@ -48,7 +50,7 @@ export class NewPageComponent implements OnInit {
       return;
     }
     this.imagesService.addImage( this.currentImage )
-      .subscribe( (image: Image) => {
+      .subscribe( () => {
         this.router.navigate(['/images/list']);
         this.showSnackbar(`Image saved succesfully!`);
       });
@@ -63,6 +65,7 @@ export class NewPageComponent implements OnInit {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.imageForm.controls['file'].setValue(file);
+    this.fileName = file.name;
   }
 
 }

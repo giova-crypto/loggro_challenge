@@ -29,7 +29,7 @@ export class ImagesController {
   }
 
   @Get('/filter')
-  async findOne(@Query() query: any): Promise<any> {
+  async findByDate(@Query() query: any): Promise<Image[]> {
     return await this.imagesService.findByDate(query.start, query.end);
   }
 
@@ -69,5 +69,15 @@ export class ImagesController {
     } catch (err) {
       throw new Error(err);
     }
+  }
+
+  @Get('/hourly')
+  async getImagesProcessedByHour() {
+    return this.imagesService.getImagesByHour();
+  }
+
+  @Get('avg-per-hour')
+  async findAverage(): Promise<any> {
+    return await this.imagesService.finAverage();
   }
 }

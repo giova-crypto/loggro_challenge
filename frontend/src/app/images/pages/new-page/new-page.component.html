@@ -18,12 +18,13 @@
               formControlName="username"
             />
           </mat-form-field>
-          <div class=" flex justify-content-bottom col-12 sm:col-6 mt-4">
-            <input type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg" required="Debe adjuntar un archivo">
-          </div>
-          
         </form>
 
+        <div class="flex justify-content-between mb-4 col-12 sm:col-6 file-upload">
+          <input type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg" id="fileInput" required="Debe adjuntar un archivo">
+          <label for="fileInput">Seleccionar archivo</label>
+          <p *ngIf="fileName">Archivo seleccionado: {{ fileName }}</p>
+        </div>
         <div class="flex justify-content-between">
           <button
             mat-flat-button

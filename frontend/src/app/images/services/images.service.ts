@@ -17,8 +17,8 @@ export class ImagesService {
     return this.http.get<Image[]>(`${ this.baseUrl }/images`);
   }
 
-  getImagesByDate( start: Date|null, end: Date|null): Observable<ImageFilter|undefined> {
-    return this.http.get<ImageFilter>(`${ this.baseUrl }/images/filter?start=${ start }&end=${ end }`);
+  getImagesByDate( start: Date|null, end: Date|null): Observable<Image[]|undefined> {
+    return this.http.get<Image[]>(`${ this.baseUrl }/images/filter?start=${ start }&end=${ end }`);
   }
 
   addImage( image: any ): Observable<Image> {
@@ -26,6 +26,10 @@ export class ImagesService {
     formData.append('username', image.username);
     formData.append('file', image.file);
     return this.http.post<Image>(`${ this.baseUrl }/images`, formData);
+  }
+
+  getHourCount():Observable<string> {
+    return this.http.get<string>(`${ this.baseUrl }/images/avg-per-hour`);
   }
 
 }

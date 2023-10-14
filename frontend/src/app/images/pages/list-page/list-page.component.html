@@ -3,7 +3,7 @@
   <h1>Listado de Imágenes</h1>
   <span class="spacer"></span>
   <form class="grid flex justify-content-start" [formGroup]="range" (ngSubmit)="onSubmit($event)">
-    <mat-form-field>
+    <mat-form-field color="accent">
       <mat-label>Ingresa un rango de fechas</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
         <input matStartDate formControlName="start" placeholder="Inicio" required>
@@ -43,7 +43,7 @@
 
 <mat-divider></mat-divider>
 
-<mat-label *ngIf="hourCount !== null" class="flex justify-content-end ">{{hourCount}} IMÁGENES POR HORA</mat-label>
+<mat-label *ngIf="hourCount" class="flex justify-content-end ">{{hourCount}} IMÁGENES POR HORA</mat-label>
 
 <div class="grid bm-8 pt-2">
 

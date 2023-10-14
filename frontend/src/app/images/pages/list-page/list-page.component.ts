@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class ListPageComponent implements OnInit {
 
   public images: Image[] = [];
-  public hourCount: number | null = null;
+  public hourCount: string | null = null;
   public selectedImage?: Image;
   range = new FormGroup({
     start: new FormControl<Date | null>(null, Validators.required),
@@ -27,6 +27,9 @@ export class ListPageComponent implements OnInit {
       .subscribe( (images: Image[]) => {
         this.images = images
       });
+      this.imagesService.getHourCount().subscribe( (hourCount: string) => {
+        this.hourCount = hourCount;
+      })
   }
 
   onSubmit(event: Event): void {
@@ -36,9 +39,8 @@ export class ListPageComponent implements OnInit {
       return;
     }else{
       this.imagesService.getImagesByDate(this.range.value.start?this.range.value.start:null, this.range.value.end?this.range.value.end:null)
-        .subscribe( (result: ImageFilter|undefined) => {
-          this.images = result?.images ? result.images : []
-          this.hourCount = result?.hourCount ? result.hourCount : 0
+        .subscribe( (images) => {
+          this.images = images!
         });
     }
     
