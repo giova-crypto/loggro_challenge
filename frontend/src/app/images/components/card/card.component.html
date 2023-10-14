@@ -1,0 +1,19 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ image.url!.split('/')[5] }}</mat-card-title>
+  </mat-card-header>
+
+  <img mat-card-image [src]="image.url" [alt]="image._id">
+
+  <mat-card-content class="mt-2">
+    <h4>Usuario: {{ image.username }}</h4>
+  </mat-card-content>
+
+  <mat-card-content class="mt-2">
+    <h4>Fecha de creación: {{ image.uploadDate | date }}</h4>
+  </mat-card-content>
+
+  <span class="spacer" mb-8></span>
+
+</mat-card>
