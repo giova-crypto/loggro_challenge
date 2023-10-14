@@ -2,15 +2,13 @@ import {
   Controller,
   Get,
   Body,
-  Patch,
-  Param,
-  Delete,
   Post,
   UseInterceptors,
   UploadedFile,
   ParseFilePipe,
   FileTypeValidator,
   MaxFileSizeValidator,
+  Query,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
 import { Image } from './schemas/image.schema';
@@ -30,9 +28,9 @@ export class ImagesController {
     return await this.imagesService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Image> {
-    return await this.imagesService.findOne(id);
+  @Get('/filter')
+  async findOne(@Query() query: any): Promise<any> {
+    return await this.imagesService.findByDate(query.start, query.end);
   }
 
   @Post()
@@ -60,7 +58,7 @@ export class ImagesController {
         contentType: 'image/png',
       });
 
-      const gcsPath = `https://storage.cloud.google.com/loggro-images/${gcsFileName}`;
+      const gcsPath = `https://storage.googleapis.com/loggro-images/${gcsFileName}`;
 
       const post = {
         username: body.username,
@@ -71,15 +69,5 @@ export class ImagesController {
     } catch (err) {
       throw new Error(err);
     }
-  }
-
-  @Patch(':id')
-  async update(@Param('id') id: string, @Body() post: Image): Promise<Image> {
-    return await this.imagesService.update(id, post);
-  }
-
-  @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Image> {
-    return await this.imagesService.delete(id);
   }
 }

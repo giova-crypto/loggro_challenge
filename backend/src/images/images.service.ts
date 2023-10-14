@@ -13,8 +13,23 @@ export class ImagesService {
     return await this.imageModel.find().exec();
   }
 
-  async findOne(id: string): Promise<Image> {
-    return await this.imageModel.findById(id).exec();
+  async findByDate(start: string, end: string): Promise<any> {
+    const date1 = new Date(start);
+    const date2 = new Date(end);
+    date2.setDate(date2.getDate() + 1);
+    const miliDifference = date2.getTime() - date1.getTime();
+    const hourDifference = miliDifference / (1000 * 60 * 60);
+    const images = await this.imageModel
+      .find({
+        uploadDate: {
+          $gte: date1,
+          $lte: date2,
+        },
+      })
+      .exec();
+
+    const hourCount = Math.abs(images.length / hourDifference).toFixed(5);
+    return { images: images, hourCount: hourCount };
   }
 
   async create(image: Image): Promise<Image> {

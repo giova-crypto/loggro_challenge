@@ -1,0 +1,43 @@
+<div class="grid flex justify-content-center ">
+
+  <div class="col-12 sm:col-6">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Agregar imagen</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-divider class="mb-2"></mat-divider>
+        <form class="grid" [formGroup]="imageForm" (ngSubmit)="onSubmit()">
+
+          <mat-form-field class="col-12 sm:col-6">
+            <mat-label>Usuario</mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              formControlName="username"
+            />
+          </mat-form-field>
+          <div class=" flex justify-content-bottom col-12 sm:col-6 mt-4">
+            <input type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/jpg" required="Debe adjuntar un archivo">
+          </div>
+          
+        </form>
+
+        <div class="flex justify-content-between">
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="onSubmit()"
+          >
+            <mat-icon>save</mat-icon>
+            Guardar
+          </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
